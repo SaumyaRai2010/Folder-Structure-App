@@ -1,0 +1,40 @@
+.file-explorer {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-item {
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.item .arrow {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.item .icon {
+  margin-right: 10px;
+}
+
+.item.selected {
+  background-color: #e0f7fa;
+  border-left: 3px solid #00796b;
+}
+
+.file-item {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.item:hover {
+  background-color: #f1f1f1;
+}
