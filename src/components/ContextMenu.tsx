@@ -9,9 +9,12 @@ interface ContextMenuProps {
 
 export const ContextMenu: React.FC<ContextMenuProps> = ({ x, y, item, onClose }) => {
   const menuRef = useRef<HTMLUListElement | null>(null); 
+  // useRef to track the DOM element unorderedList and to track click outside the UL
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // menuRef.current checks the current value of ref
+      // !menuRef.current.contains(event.target as Node) is used to check if the current click event is outside the contextMenu
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         onClose(); 
       }
@@ -20,7 +23,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ x, y, item, onClose })
     document.addEventListener("mousedown", handleClickOutside); 
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside); 
+      document.removeEventListener("mousedown", handleClickOutside); // will be executed when component unmounts or dependency array changes
     };
   }, [onClose]);
 
