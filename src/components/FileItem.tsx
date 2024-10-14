@@ -7,19 +7,15 @@ interface FileItemProps {
 }
 
 const FileItem: React.FC<FileItemProps> = ({ item, level }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
-  const [contextMenuVisible, setContextMenuVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Manages whether a folder is open or not
+  const [contextMenuVisible, setContextMenuVisible] = useState(false); //Manages visibility of the context menu.
   const [contextMenuPosition, setContextMenuPosition] = useState({
     x: 0,
     y: 0,
-  });
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  }); //Stores the position of the context menu to render it near the cursor.
+  const [selectedItem, setSelectedItem] = useState<any>(null); //Stores the currently right-clicked item for the context menu.
 
-  const handleLeftClick = () => {
-    setIsSelected(!isSelected);
-  };
-
+  //right click opens the context action menu
   const handleRightClick = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
@@ -32,6 +28,7 @@ const FileItem: React.FC<FileItemProps> = ({ item, level }) => {
     setContextMenuVisible(false);
   };
 
+  //toggles open and closed state for folders
   const toggleFolder = () => {
     setIsOpen(!isOpen);
   };
@@ -46,7 +43,7 @@ const FileItem: React.FC<FileItemProps> = ({ item, level }) => {
         className={`item ${
           item.type === "folder" ? (isOpen ? "selected" : "closed") : ""
         }`}
-        onClick={item.type === "folder" ? toggleFolder : handleLeftClick}
+        onClick={item.type === "folder" ? toggleFolder : () => {console.log("left click")}}
       >
         {item.type === "folder" && (
           <span className="arrow" onClick={toggleFolder}>
